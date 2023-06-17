@@ -109,7 +109,6 @@ async function run() {
 
         app.patch('/users/admin/:id', async (req, res) => {
             const id = req.params.id;
-            // console.log(id);
             const filter = { _id: new ObjectId(id) };
             const updateDoc = {
                 $set: {
@@ -164,7 +163,6 @@ async function run() {
         })
 
 
-
         // Get all classes 
         app.get('/classes', async (req, res) => {
             let query = {};
@@ -173,7 +171,6 @@ async function run() {
             }
             const result = await classCollection.find(query).toArray();
             res.send(result)
-            // console.log(query);
         })
 
         // Upload classes
