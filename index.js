@@ -30,7 +30,6 @@ const verifyJWT = (req, res, next) => {
     })
 }
 
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.u2v3lxe.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -51,8 +50,7 @@ async function run() {
         const classCollection = client.db("SSoulDB").collection("classes");
         const cartCollection = client.db("SSoulDB").collection("carts");
 
-
-        // JWT post api
+        // JWT post api 
 
         app.post('/jwt', async (req, res) => {
             const user = req.body;
@@ -60,7 +58,7 @@ async function run() {
             res.send(token)
         })
 
-        // verify admin access
+        // verify admin access 
         const verifyAdmin = async (req, res, next) => {
             const email = req.decoded.email;
             const query = { email: email }
@@ -71,14 +69,14 @@ async function run() {
             next();
         }
 
-        // get user api
+        // get user api 
 
         app.get('/users', verifyJWT, verifyAdmin, async (req, res) => {
             const result = await userCollection.find().toArray();
             res.send(result)
         })
 
-        // Post Users Api
+        // Post Users Api 
 
         app.post('/users', async (req, res) => {
             const user = req.body;
@@ -92,7 +90,7 @@ async function run() {
         })
 
 
-        // Get admin user 
+        // Get admin user  by email
 
         app.get('/users/admin/:email', verifyJWT, async (req, res) => {
             const email = req.params.email;
@@ -106,7 +104,7 @@ async function run() {
         })
 
 
-        // Update user admin roles
+        // Update user admin roles 
 
         app.patch('/users/admin/:id', async (req, res) => {
             const id = req.params.id;
@@ -160,7 +158,7 @@ async function run() {
         })
 
 
-        // Get all classes 
+        // Get all classes  
         app.get('/classes', async (req, res) => {
             let query = {};
             if (req.query?.email) {
