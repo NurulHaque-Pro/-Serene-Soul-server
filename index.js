@@ -126,11 +126,11 @@ async function run() {
 
         // Get Teacher Role users
 
-        app.get('/users/teacher/:email', verifyJWT, async (req, res) => {
+        app.get('/users/teacher/:email', async (req, res) => {
             const email = req.params.email;
-            if (req.decoded.email !== email) {
-                return res.send({ teacher: false })
-            }
+            // if (req.decoded.email !== email) {
+            //     return res.send({ teacher: false })
+            // }
             const query = { email: email }
             const user = await userCollection.findOne(query);
             const result = { teacher: user?.role === 'teacher' }
