@@ -149,7 +149,7 @@ async function run() {
 
         })
 
-        // Delete user
+        // Delete user Api
 
         app.delete('/users/:id', async (req, res) => {
             const id = req.params.id;
