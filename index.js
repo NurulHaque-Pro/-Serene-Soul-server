@@ -171,10 +171,8 @@ async function run() {
             console.log(result);
         })
 
-        
 
-
-        // Upload classes
+        // Upload classes Api 
 
         app.post('/classes', async (req, res) => {
             const item = req.body;
@@ -182,7 +180,7 @@ async function run() {
             res.send(result)
         })
 
-        // Delete class
+        // Delete class by id
 
         app.delete('/classes/:id', async (req, res) => {
             const id = req.params.id;
@@ -192,9 +190,9 @@ async function run() {
         })
 
 
-        // Add to card get
+        // Add to card get 
 
-        app.get('/carts', verifyJWT, async (req, res) => {
+        app.get('/carts', async (req, res) => {
             const email = req.query.email;
 
             if (!email) {
