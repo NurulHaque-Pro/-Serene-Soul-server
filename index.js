@@ -52,13 +52,14 @@ async function run() {
         const cartCollection = client.db("SSoulDB").collection("carts");
 
 
-        // JWT post
+        // JWT post api
 
         app.post('/jwt', async (req, res) => {
             const user = req.body;
             const token = jwt.sign(user, process.env.ACCESS_TOKEN, { expiresIn: '1h' })
             res.send(token)
         })
+
         // verify admin access
         const verifyAdmin = async (req, res, next) => {
             const email = req.decoded.email;
