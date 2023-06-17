@@ -184,6 +184,7 @@ async function run() {
 
         app.delete('/classes/:id', async (req, res) => {
             const id = req.params.id;
+
             const query = { _id: new ObjectId(id) };
             const result = await classCollection.deleteOne(query);
             res.send(result);
@@ -192,7 +193,7 @@ async function run() {
 
         // Add to card get 
 
-        app.get('/carts', async (req, res) => {
+        app.get('/carts', verifyJWT, async (req, res) => {
             const email = req.query.email;
 
             if (!email) {
@@ -211,6 +212,7 @@ async function run() {
 
         app.post('/carts', async (req, res) => {
             const item = req.body;
+
             const result = await cartCollection.insertOne(item);
             res.send(result)
         })
